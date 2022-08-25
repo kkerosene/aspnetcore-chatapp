@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReenbitChat</title>
+
+    <link rel="stylesheet" href="~/css/site.css?v=4" />
+</head>
+
+<body>
+
+    <div class="navbar">
+        <a class="navbtn" asp-controller="Home" asp-action="Index">Home</a>
+        <a class="navbtn" asp-controller="Home" asp-action="Find">Find</a>
+        <a class="navbtn" asp-controller="Home" asp-action="Private">Private</a>
+        <a class="logout" asp-controller="Account" asp-action="Logout">Log Out</a>
+    </div>
+
+    <div class="main">
+        @if(User.Identity.IsAuthenticated){
+        <vc:chat></vc:chat>
+        }
+        <div class="chat">
+            @RenderBody()
+        </div>
+    </div>
+
+    <div class="modal" id="create-chat-modal">
+        <form asp-controller="Home" asp-action="CreateChat" class="modal-body">
+            <button type="button" class="close" onclick="closeModal()">X</button>
+            <header>Create Chat</header>
+            <div>
+                <input name="name">
+            </div>
+            <footer>
+                <button>Create</button>
+            </footer>
+        </form>
+    </div>
+
+    <script type="text/javascript" src="~/js/site.js?v=3"></script>
+    @RenderSection("scripts", false)
+
+</body>
+</html>
